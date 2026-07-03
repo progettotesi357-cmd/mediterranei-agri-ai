@@ -232,23 +232,38 @@ document.addEventListener('keydown', e => {
 });
 
 /* ─── MOUSE WHEEL NAVIGATION ─────────────────────────────────── */
+/**
+ * Gestisce la navigazione tramite rotella del mouse (wheel) in modo fluido.
+ * Filtra i movimenti orizzontali, previene scorrimenti multipli indesiderati
+ * tramite un lock di 250ms e consente al browser lo scorrimento nativo
+ * se ci si trova già alle estremità della presentazione (prima o ultima slide).
+ */
 document.addEventListener('wheel', e => {
-  e.preventDefault();
+  // Filtra micro scroll, jitter e ignora lo scorrimento orizzontale
+  if (Math.abs(e.deltaY) < 50) return;
 
-  if (wheelLocked) return;
+  if (wheelLocked) {
+    e.preventDefault();
+    return;
+  }
 
-  // Sensitivity threshold to filter tiny scroll jitter
-  const THRESHOLD = 40;
-  if (Math.abs(e.deltaY) < THRESHOLD && Math.abs(e.deltaX) < THRESHOLD) return;
+  const isScrollingDown = e.deltaY > 0;
+  const canGoDown = isScrollingDown && currentIndex < TOTAL_SLIDES - 1;
+  const canGoUp = !isScrollingDown && currentIndex > 0;
 
-  // Lock wheel briefly to prevent rapid fire
-  wheelLocked = true;
-  setTimeout(() => { wheelLocked = false; }, 1000);
+  if (canGoDown || canGoUp) {
+    // Impedisce lo scorrimento nativo del browser solo se la transizione è valida
+    e.preventDefault();
 
-  if (e.deltaY > 0 || e.deltaX > 0) {
-    goToSlide(currentIndex + 1);
-  } else {
-    goToSlide(currentIndex - 1);
+    // Attiva il lock temporaneo per filtrare il momentum dello scroll
+    wheelLocked = true;
+    setTimeout(() => { wheelLocked = false; }, 250);
+
+    if (isScrollingDown) {
+      goToSlide(currentIndex + 1);
+    } else {
+      goToSlide(currentIndex - 1);
+    }
   }
 }, { passive: false });
 
