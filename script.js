@@ -137,6 +137,48 @@ function animateStats(_slideEl) {
   // Stats are now text-based; no numeric animation needed.
 }
 
+/* ─── COUNTER ANIMATION ──────────────────────────────────────── */
+
+/**
+ * Fades #currentSlide and #counterLabel out, updates their text,
+ * then fades them back in — in sync with the slide content transition.
+ *
+ * Strategy: inline-style opacity is toggled via the same double-rAF
+ * pattern used by triggerAnimations(), so the counter participates
+ * in the same visual beat as the incoming slide's content.
+ *
+ * We use a 120ms fade-out (fast enough to feel immediate) followed
+ * by an rAF-driven fade-in timed to the CSS easing of the slide.
+ */
+function animateCounter() {
+  const FADE_DURATION = '120ms';
+  const elements = [currentLabel, counterLabel].filter(Boolean);
+
+  // 1) Snap to invisible, applying a quick transition
+  elements.forEach(el => {
+    el.style.transition = `opacity ${FADE_DURATION} ease`;
+    el.style.opacity    = '0';
+    el.style.transform  = 'translateY(4px)';
+  });
+
+  // 2) After the fade-out completes, update text and fade back in.
+  //    Double-rAF ensures the browser has committed the opacity-0 frame
+  //    before we start the fade-in (same pattern as triggerAnimations).
+  setTimeout(() => {
+    // Text is already updated by updateCounter/updateCounterLabel
+    // called just before animateCounter(); just re-trigger the fade-in.
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        elements.forEach(el => {
+          el.style.transition = `opacity 280ms ease, transform 280ms ease`;
+          el.style.opacity    = '';
+          el.style.transform  = '';
+        });
+      });
+    });
+  }, 130); // Slightly longer than FADE_DURATION to guarantee the frame is committed
+}
+
 /* ─── MAIN NAVIGATION ────────────────────────────────────────── */
 
 /**
@@ -189,16 +231,24 @@ function goToSlide(targetIndex) {
   // Special: animate trace bar on slide 2 (index 1)
   // (handled by CSS .is-active .trace-bar-fill)
 
-  // Update UI
+  // Update UI elements (progress, ticks, dots, scroll hint) synchronously
+  // so they all change at the exact same frame as the slide class swap.
   updateProgress();
-  updateCounter();
-  updateCounterLabel();
   updateTicks();
   updateDots();
   updateScrollHint();
 
-  // Unlock after CSS transition
-  const UNLOCK_MS = 680; // Aligned to CSS transition duration (~650ms) to minimise inter-gesture lag
+  // Update counter text first, then animate it in sync with slide content.
+  // animateCounter() fades the numbers out, waits one tick, then fades them
+  // back in — matching the visual rhythm of triggerAnimations().
+  updateCounter();
+  updateCounterLabel();
+  animateCounter();
+
+  // Unlock after CSS slide transition completes.
+  // 680 ms matches the CSS transition duration (~650 ms) + a small buffer
+  // to prevent isAnimating from clearing before the slide has fully settled.
+  const UNLOCK_MS = 680;
   setTimeout(() => {
     isAnimating = false;
   }, UNLOCK_MS);
@@ -233,38 +283,47 @@ document.addEventListener('keydown', e => {
 
 /* ─── MOUSE WHEEL NAVIGATION ─────────────────────────────────── */
 /**
- * Gestisce la navigazione tramite rotella del mouse (wheel) in modo fluido.
- * Filtra i movimenti orizzontali, previene scorrimenti multipli indesiderati
- * tramite un lock di 250ms e consente al browser lo scorrimento nativo
- * se ci si trova già alle estremità della presentazione (prima o ultima slide).
+ * Wheel handler design rationale:
+ *
+ * THRESHOLD (32): Filters jitter and accidental micro-scrolls on trackpads
+ *   without requiring an exaggerated gesture. Values below ~25 produce false
+ *   triggers; values above ~50 feel sluggish on low-sensitivity devices.
+ *
+ * LOCK (170 ms): Absorbs the inertial momentum that follows a deliberate scroll
+ *   gesture, preventing duplicate goToSlide() calls from a single swipe.
+ *   Set below UNLOCK_MS (680 ms) so it releases well before isAnimating clears,
+ *   allowing the next intentional gesture to be registered cleanly.
+ *
+ * e.preventDefault() is called ONLY when a slide change is possible; when
+ * already at the first or last slide the browser receives the event normally.
+ *
+ * deltaX is ignored entirely — direction is decided solely by deltaY.
  */
 document.addEventListener('wheel', e => {
-  // Filtra micro scroll e jitter; ignora completamente lo scorrimento orizzontale
+  // Ignore horizontal scrolls and micro-jitter
   if (Math.abs(e.deltaY) < 32) return;
 
   if (wheelLocked) {
+    // Still in the momentum window — swallow the event to prevent double-jump
     e.preventDefault();
     return;
   }
 
   const isScrollingDown = e.deltaY > 0;
   const canGoDown = isScrollingDown && currentIndex < TOTAL_SLIDES - 1;
-  const canGoUp = !isScrollingDown && currentIndex > 0;
+  const canGoUp   = !isScrollingDown && currentIndex > 0;
 
   if (canGoDown || canGoUp) {
-    // Impedisce lo scorrimento nativo del browser solo se la transizione è valida
+    // Intercept the event only for valid transitions
     e.preventDefault();
 
-    // Lock breve (170ms) per assorbire il momentum senza ritardare il gesto successivo
+    // Short lock to absorb scroll momentum (see rationale above)
     wheelLocked = true;
     setTimeout(() => { wheelLocked = false; }, 170);
 
-    if (isScrollingDown) {
-      goToSlide(currentIndex + 1);
-    } else {
-      goToSlide(currentIndex - 1);
-    }
+    goToSlide(isScrollingDown ? currentIndex + 1 : currentIndex - 1);
   }
+  // If already at boundary: event not prevented → browser handles naturally
 }, { passive: false });
 
 /* ─── TOUCH NAVIGATION ───────────────────────────────────────── */
