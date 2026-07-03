@@ -198,7 +198,7 @@ function goToSlide(targetIndex) {
   updateScrollHint();
 
   // Unlock after CSS transition
-  const UNLOCK_MS = 950;
+  const UNLOCK_MS = 680; // Aligned to CSS transition duration (~650ms) to minimise inter-gesture lag
   setTimeout(() => {
     isAnimating = false;
   }, UNLOCK_MS);
@@ -239,8 +239,8 @@ document.addEventListener('keydown', e => {
  * se ci si trova già alle estremità della presentazione (prima o ultima slide).
  */
 document.addEventListener('wheel', e => {
-  // Filtra micro scroll, jitter e ignora lo scorrimento orizzontale
-  if (Math.abs(e.deltaY) < 50) return;
+  // Filtra micro scroll e jitter; ignora completamente lo scorrimento orizzontale
+  if (Math.abs(e.deltaY) < 32) return;
 
   if (wheelLocked) {
     e.preventDefault();
@@ -255,9 +255,9 @@ document.addEventListener('wheel', e => {
     // Impedisce lo scorrimento nativo del browser solo se la transizione è valida
     e.preventDefault();
 
-    // Attiva il lock temporaneo per filtrare il momentum dello scroll
+    // Lock breve (170ms) per assorbire il momentum senza ritardare il gesto successivo
     wheelLocked = true;
-    setTimeout(() => { wheelLocked = false; }, 250);
+    setTimeout(() => { wheelLocked = false; }, 170);
 
     if (isScrollingDown) {
       goToSlide(currentIndex + 1);
