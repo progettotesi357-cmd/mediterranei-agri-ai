@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="How Artificial Intelligence enhances the value of cooperative agri-food products. A premium presentation by Mediterranei — Legacoop." />
+  <title>AI & Cooperative Food — Mediterranei</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ─── PROGRESS BAR ─────────────────────────────────────── -->
+  <div class="progress-bar" id="progressBar" role="progressbar" aria-label="Presentation progress">
+    <div class="progress-fill" id="progressFill"></div>
+    <!-- Journey ticks: one per slide, positioned proportionally -->
+    <div class="progress-tick" style="left:0%"   data-tick="0"></div>
+    <div class="progress-tick" style="left:20%"  data-tick="1"></div>
+    <div class="progress-tick" style="left:40%"  data-tick="2"></div>
+    <div class="progress-tick" style="left:60%"  data-tick="3"></div>
+    <div class="progress-tick" style="left:80%"  data-tick="4"></div>
+    <div class="progress-tick" style="left:100%" data-tick="5"></div>
+  </div>
+
+  <!-- ─── SLIDE COUNTER ────────────────────────────────────── -->
+  <div class="slide-counter" id="slideCounter" aria-live="polite">
+    <div class="slide-counter-numbers">
+      <span id="currentSlide">01</span>
+      <span class="counter-sep">—</span>
+      <span class="counter-total">06</span>
+    </div>
+    <span class="counter-label" id="counterLabel">Field &amp; origin</span>
+  </div>
+
+  <!-- ─── VERTICAL NAV DOTS ─────────────────────────────────── -->
+  <nav class="nav-dots" id="navDots" aria-label="Slide navigation">
+    <button class="dot active" data-slide="0" aria-label="Go to slide 1"></button>
+    <button class="dot" data-slide="1" aria-label="Go to slide 2"></button>
+    <button class="dot" data-slide="2" aria-label="Go to slide 3"></button>
+    <button class="dot" data-slide="3" aria-label="Go to slide 4"></button>
+    <button class="dot" data-slide="4" aria-label="Go to slide 5"></button>
+    <button class="dot" data-slide="5" aria-label="Go to slide 6"></button>
+  </nav>
+
+  <!-- ─── LOGO ─────────────────────────────────────────────── -->
+  <header class="logo-area" aria-label="Brand">
+    <div class="logo-mark">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Two overlapping circles suggesting connection/network -->
+        <circle cx="11" cy="14" r="6" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.85"/>
+        <circle cx="17" cy="14" r="6" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.85"/>
+        <path d="M11 14 H17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="14" cy="14" r="1.5" fill="currentColor"/>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <span class="logo-name">Mediterranei</span>
+      <span class="logo-sub">Legacoop</span>
+    </div>
+  </header>
+
+  <!-- ─── SCROLL HINT ──────────────────────────────────────── -->
+  <div class="scroll-hint" id="scrollHint" aria-hidden="true">
+    <span class="scroll-hint-label">Scroll to explore</span>
+    <div class="scroll-hint-arrow">
+      <i data-lucide="chevron-down"></i>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SLIDES CONTAINER
+  ════════════════════════════════════════════════════════════════ -->
+  <main class="slides-wrapper" id="slidesWrapper">
+
+    <!-- ─── SLIDE 01 · HERO ──────────────────────────────────── -->
+    <section class="slide slide-hero" id="slide-0" data-index="0" aria-label="Slide 1: Intelligence at the Heart of the Land">
+      <div class="slide-bg slide-bg-img" style="background-image: url('assets/hero_landscape.png')"></div>
+      <div class="slide-bg slide-bg-overlay"></div>
+
+      <!-- Decorative grain texture -->
+      <div class="grain" aria-hidden="true"></div>
+
+      <div class="slide-content slide-content--center">
+        <div class="hero-eyebrow animate-in" data-delay="0">
+          <span class="eyebrow-line"></span>
+          <span class="eyebrow-text">Artificial Intelligence · Agri-food Cooperation</span>
+          <span class="eyebrow-line"></span>
+        </div>
+
+        <h1 class="hero-title animate-in" data-delay="1">
+          Intelligence<br/>
+          <em>at the Heart</em><br/>
+          of the Land
+        </h1>
+
+        <p class="hero-sub animate-in" data-delay="2">
+          Where cooperative roots meet AI precision for compliant shelves worldwide.
+        </p>
+
+        <div class="hero-badge animate-in" data-delay="3">
+          <span class="badge-pill">
+            <i data-lucide="sprout" class="badge-icon"></i>
+            Agri&#8209;Food Cooperative Network
+          </span>
+        </div>
+      </div>
+
+      <!-- Bottom strip -->
+      <div class="slide-strip animate-in" data-delay="4" aria-hidden="true">
+        <span>Mediterranei</span>
+        <span class="strip-dot">·</span>
+        <span>Legacoop</span>
+        <span class="strip-dot">·</span>
+        <span>Agri-Food Cooperative</span>
+        <span class="strip-dot">·</span>
+        <span>Italy</span>
+      </div>
+    </section>
+
+    <!-- ─── SLIDE 02 · TRACEABILITY ──────────────────────────── -->
+    <section class="slide slide-trace" id="slide-1" data-index="1" aria-label="Slide 2: Every Product Has a Story">
+      <div class="slide-bg slide-bg-img" style="background-image: url('assets/produce_macro.png')"></div>
+      <div class="slide-bg slide-bg-overlay slide-bg-overlay--trace"></div>
+      <div class="grain" aria-hidden="true"></div>
+
+      <div class="slide-content slide-content--split">
+        <!-- Left: Text -->
+        <div class="split-text">
+          <p class="section-label section-label--trace animate-in" data-delay="0">02 · Traceability</p>
+          <h2 class="section-title section-title--trace animate-in" data-delay="1">
+            Every product<br/>
+            <em>has a story.</em><br/>
+            Now it's readable.
+          </h2>
+          <p class="section-body section-body--trace animate-in" data-delay="2">
+            AI and IoT field sensors make the invisible visible along the cooperative journey, turning real-time data into a verified product passport with zero compromise.
+          </p>
+
+          <div class="features-list animate-in" data-delay="3">
+            <div class="feature-item" id="feat-origin">
+              <div class="feature-icon">
+                <i data-lucide="map-pin"></i>
+              </div>
+              <div class="feature-info">
+                <strong>Certified Origin</strong>
+                <span>GPS-verified field data</span>
+              </div>
+            </div>
+            <div class="feature-item" id="feat-chain">
+              <div class="feature-icon">
+                <i data-lucide="link"></i>
+              </div>
+              <div class="feature-info">
+                <strong>Full Supply Chain</strong>
+                <span>From harvest to delivery</span>
+              </div>
+            </div>
+            <div class="feature-item" id="feat-qr">
+              <div class="feature-icon">
+                <i data-lucide="scan-qr-code"></i>
+              </div>
+              <div class="feature-info">
+                <strong>Consumer-Facing</strong>
+                <span>One scan. Complete transparency.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Visual card -->
+        <div class="split-visual animate-in" data-delay="2">
+          <div class="trace-card">
+            <div class="trace-card-header">
+              <i data-lucide="leaf"></i>
+              <span>Product Passport</span>
+              <span class="trace-status">● Live</span>
+            </div>
+            <div class="trace-card-body">
+              <div class="trace-row">
+                <span class="trace-key">Origin</span>
+                <span class="trace-val">Puglia, IT · 41.1°N</span>
+              </div>
+              <div class="trace-row">
+                <span class="trace-key">Harvest</span>
+                <span class="trace-val">14 June 2025</span>
+              </div>
+              <div class="trace-row">
+                <span class="trace-key">Cooperative</span>
+                <span class="trace-val">Mediterranei Soc. Coop.</span>
+              </div>
+              <div class="trace-row">
+                <span class="trace-key">Certification</span>
+                <span class="trace-val">Organic · DOP · AI-Verified</span>
+              </div>
+              <div class="trace-row">
+                <span class="trace-key">CO₂ Impact</span>
+                <span class="trace-val">−38% vs. industry avg.</span>
+              </div>
+            </div>
+            <div class="trace-card-footer">
+              <div class="trace-bar">
+                <div class="trace-bar-fill"></div>
+              </div>
+              <span class="trace-bar-label">Verified trust index — <span class="trust-high-accent">HIGH</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── SLIDE 03 · TRUST & AI ────────────────────────────── -->
+    <section class="slide slide-trust" id="slide-2" data-index="2" aria-label="Slide 3: AI That Serves People">
+      <div class="slide-bg slide-bg-solid slide-bg--ivory"></div>
+      <div class="grain grain--light" aria-hidden="true"></div>
+
+      <!-- Decorative large background text -->
+      <div class="ghost-text" aria-hidden="true">TRUST</div>
+
+      <div class="slide-content slide-content--center">
+        <p class="section-label animate-in" data-delay="0">03 · Artificial Intelligence</p>
+        <h2 class="section-title section-title--dark animate-in" data-delay="1">
+          AI that serves<br/>
+          <em>people.</em><br/>
+          Not the other way around.
+        </h2>
+        <p class="section-body section-body--dark animate-in" data-delay="2">
+          Our AI amplifies the expertise of <span class="highlight-members">thousands of cooperative members</span>. It predicts. It guides. It never replaces.
+        </p>
+
+        <!-- Pillars grid -->
+        <div class="pillars-grid animate-in" data-delay="3">
+          <div class="pillar" id="pillar-quality">
+            <div class="pillar-header">
+              <div class="pillar-icon"><i data-lucide="shield-check"></i></div>
+              <h3 class="pillar-title">Quality Control</h3>
+            </div>
+            <p class="pillar-body"><strong>Computer vision</strong> inspects every batch. Consistent, verified quality at every step.</p>
+          </div>
+          <div class="pillar" id="pillar-forecast">
+            <div class="pillar-header">
+              <div class="pillar-icon"><i data-lucide="trending-up"></i></div>
+              <h3 class="pillar-title">Demand Forecast</h3>
+            </div>
+            <p class="pillar-body"><strong>Predictive models</strong> align cooperative production with GDO market needs. Reduced waste.</p>
+          </div>
+          <div class="pillar" id="pillar-climate">
+            <div class="pillar-header">
+              <div class="pillar-icon"><i data-lucide="cloud-sun"></i></div>
+              <h3 class="pillar-title">Climate Resilience</h3>
+            </div>
+            <p class="pillar-body"><strong>Smart farming algorithms</strong> and agro‑meteorological intelligence guide irrigation, harvest timing and crop planning.</p>
+          </div>
+          <div class="pillar" id="pillar-price">
+            <div class="pillar-header">
+              <div class="pillar-icon"><i data-lucide="bar-chart-2"></i></div>
+              <h3 class="pillar-title">Fair Pricing</h3>
+            </div>
+            <p class="pillar-body"><strong>Market intelligence</strong> supports transparent, equitable value sharing across the network.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── SLIDE 04 · SUSTAINABILITY ───────────────────────── -->
+    <section class="slide slide-sustain" id="slide-3" data-index="3" aria-label="Slide 4: The Land Remembers">
+      <div class="slide-bg slide-bg-img" style="background-image: url('assets/sustainability_field.png')"></div>
+      <div class="slide-bg slide-bg-overlay slide-bg-overlay--deep"></div>
+      <div class="grain" aria-hidden="true"></div>
+
+      <div class="slide-content slide-content--sustain-layout">
+        <!-- Top Row: Title & Pilot Card -->
+        <div class="sustain-top-row">
+          <div class="sustain-left">
+            <p class="section-label section-label--light animate-in" data-delay="0">04 · Sustainability</p>
+            <h2 class="sustain-title animate-in" data-delay="1">
+              The land<br/>
+              <em>remembers.</em><br/>
+              AI helps us<br/>
+              honour it.
+            </h2>
+          </div>
+          <div class="sustain-right animate-in" data-delay="2">
+            <div class="pilot-card">
+              <div class="pilot-card-header">
+                <i data-lucide="cpu"></i>
+                <span>AI harvest pilot</span>
+                <span class="pilot-badge">Freschissimi</span>
+              </div>
+              <div class="pilot-card-body">
+                <p>An AI‑driven pilot aligns harvest with demand, reducing waste and increasing value for local cooperative farmers — inspired by Freschissimi’s +17% valorisation and lower waste results.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Row: Stats & Footer -->
+        <div class="sustain-bottom-row animate-in" data-delay="2">
+          <!-- Stats row -->
+          <div class="stats-row">
+            <div class="stat-item stat-item--text" id="stat-water">
+              <span class="stat-big">Up to 40%</span>
+              <span class="stat-label">Less water used</span>
+            </div>
+            <div class="stat-divider" aria-hidden="true"></div>
+            <div class="stat-item stat-item--text" id="stat-waste">
+              <span class="stat-big">Double‑digit</span>
+              <span class="stat-label">Food waste reduction</span>
+            </div>
+            <div class="stat-divider" aria-hidden="true"></div>
+            <div class="stat-item stat-item--text" id="stat-co2">
+              <span class="stat-big">Significant</span>
+              <span class="stat-label">CO₂ footprint cut</span>
+            </div>
+          </div>
+
+          <p class="sustain-footer">
+            Measured across recent cooperative harvest cycles.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── SLIDE 05 · COOPERATIVE VALUES ───────────────────── -->
+    <section class="slide slide-coop" id="slide-4" data-index="4" aria-label="Slide 5: Together, Smarter">
+      <div class="slide-bg slide-bg-img" style="background-image: url('assets/cooperative_hands.png')"></div>
+      <div class="slide-bg slide-bg-overlay slide-bg-overlay--warm"></div>
+      <div class="grain" aria-hidden="true"></div>
+
+      <div class="slide-content slide-content--center">
+        <p class="section-label section-label--light animate-in" data-delay="0">05 · Cooperative Values</p>
+
+        <h2 class="coop-title animate-in" data-delay="1">
+          Together,<br/>
+          <em>smarter.</em>
+        </h2>
+
+        <p class="coop-sub animate-in" data-delay="2">
+          AI connects cooperative fields and GDO operations, protecting product quality, territories and transparent labels.
+        </p>
+
+        <!-- Value badges -->
+        <div class="value-badges animate-in" data-delay="3">
+          <span class="value-badge" id="badge-trust">
+            <i data-lucide="handshake"></i> Trust
+          </span>
+          <span class="value-badge" id="badge-territory">
+            <i data-lucide="mountain"></i> Territory &amp; brand
+          </span>
+          <span class="value-badge" id="badge-transparency">
+            <i data-lucide="eye"></i> Transparency
+          </span>
+          <span class="value-badge" id="badge-fairness">
+            <i data-lucide="scale"></i> Fairness
+          </span>
+          <span class="value-badge" id="badge-future">
+            <i data-lucide="seedling"></i> Future&#8209;proof
+          </span>
+        </div>
+
+        <!-- Filiera journey line -->
+        <div class="filiera-container animate-in" data-delay="4" aria-label="Journey from field to consumer">
+          <div class="filiera-row">
+            <div class="filiera-dot-wrap"><div class="filiera-dot"><i data-lucide="wheat"></i></div></div>
+            <div class="filiera-track" aria-hidden="true"><div class="filiera-track-fill"></div></div>
+            <div class="filiera-dot-wrap"><div class="filiera-dot"><i data-lucide="cpu"></i></div></div>
+            <div class="filiera-track" aria-hidden="true"><div class="filiera-track-fill"></div></div>
+            <div class="filiera-dot-wrap"><div class="filiera-dot"><i data-lucide="shopping-cart"></i></div></div>
+          </div>
+          <div class="filiera-labels">
+            <span class="filiera-label label-left">Field</span>
+            <span class="filiera-label label-center">Cooperative AI</span>
+            <span class="filiera-label label-right">GDO &amp; consumer</span>
+          </div>
+        </div>
+
+        <!-- Generic cooperative strength statement -->
+        <div class="coop-stat animate-in" data-delay="5">
+          <div class="coop-stat-label" style="font-size:0.75rem; max-width:480px; line-height:1.6;">From cooperative fields to conscious shoppers, one transparent story for every product.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── SLIDE 06 · CLOSING / CTA ────────────────────────── -->
+    <section class="slide slide-close" id="slide-5" data-index="5" aria-label="Slide 6: The Future of Food Is Cooperative">
+      <div class="slide-bg slide-bg-solid slide-bg--charcoal"></div>
+
+      <!-- Animated background pattern -->
+      <div class="close-pattern" aria-hidden="true">
+        <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" class="close-pattern-svg">
+          <defs>
+            <radialGradient id="rg1" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#7A9E7E" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="#7A9E7E" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle cx="400" cy="400" r="350" fill="url(#rg1)"/>
+          <circle cx="400" cy="400" r="280" fill="none" stroke="#7A9E7E" stroke-width="0.5" opacity="0.2"/>
+          <circle cx="400" cy="400" r="200" fill="none" stroke="#7A9E7E" stroke-width="0.5" opacity="0.15"/>
+          <circle cx="400" cy="400" r="120" fill="none" stroke="#C8A97E" stroke-width="0.5" opacity="0.2"/>
+          <circle cx="400" cy="400" r="60"  fill="none" stroke="#C8A97E" stroke-width="0.5" opacity="0.25"/>
+        </svg>
+      </div>
+
+      <div class="grain grain--dark" aria-hidden="true"></div>
+
+      <div class="slide-content slide-content--center">
+        <p class="section-label section-label--light animate-in" data-delay="0">06 · Closing</p>
+
+        <h2 class="close-title animate-in" data-delay="1">
+          The future<br/>
+          of food is<br/>
+          <em>cooperative.</em>
+        </h2>
+
+        <p class="close-sub animate-in" data-delay="2">
+          Rooted in tradition. Driven by intelligence. Committed to people.
+        </p>
+
+        <!-- CTA Block -->
+        <div class="close-cta animate-in" data-delay="3">
+          <a href="mailto:buyers@mediterranei.it" class="cta-button" id="ctaEmail">
+            <i data-lucide="mail"></i>
+            <span>Deploy a 90-day AI pilot. 3 product lines. Fully traceable.</span>
+            <i data-lucide="arrow-right" class="cta-arrow"></i>
+          </a>
+          <div class="cta-contact">
+            <span>buyers@mediterranei.it</span>
+            <span class="cta-sep">·</span>
+            <span>www.mediterranei.it</span>
+          </div>
+        </div>
+
+        <!-- Certs row -->
+        <div class="close-certs animate-in" data-delay="4">
+          <div class="cert-item" id="cert-bio">
+            <i data-lucide="leaf"></i>
+            <span>Organic &amp; quality-certified supply chains</span>
+          </div>
+          <div class="cert-item" id="cert-dop">
+            <i data-lucide="award"></i>
+            <span>DOP &amp; IGP designation network</span>
+          </div>
+          <div class="cert-item" id="cert-legacoop">
+            <i data-lucide="users"></i>
+            <span>Cooperative members in the Legacoop network</span>
+          </div>
+          <div class="cert-item" id="cert-global">
+            <i data-lucide="globe"></i>
+            <span>Export-ready for international markets</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- /.slides-wrapper -->
+
+  <script src="script.js"></script>
+</body>
+</html>
